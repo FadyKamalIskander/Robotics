@@ -33,7 +33,7 @@ void process_image_callback(const sensor_msgs::Image img)
     uint32_t stepIncrement = 0;
     bool isWhitePixel = false;
     static bool isMoving = false;
-    // Loop through each pixel in the image and check if it is white
+    // Loop through each pixel in the image and check if it is white 
     for (int i = 0; i < img.height * img.step; i+=3) 
     {
         if (img.data[i] == white_pixel && 
@@ -60,8 +60,8 @@ void process_image_callback(const sensor_msgs::Image img)
             }
             break;
         }
-        stepIncrement++;
-        if (stepIncrement > img.step)
+        stepIncrement+=3;
+        if (stepIncrement >= img.step)
         {
             stepIncrement = 0;
         }
