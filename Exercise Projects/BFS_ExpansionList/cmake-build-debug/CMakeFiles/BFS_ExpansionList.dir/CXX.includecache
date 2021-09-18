@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/fady_/CLionProjects/BFS_ExpansionList/Source.cpp
+iostream
+-
+string.h
+-
+vector
+-
+algorithm
+-
+
