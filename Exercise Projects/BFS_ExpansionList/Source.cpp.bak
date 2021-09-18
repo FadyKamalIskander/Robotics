@@ -48,16 +48,20 @@ void search(Map map, Planner planner)
     int currExp = 0;
     int currO = 0;
     vector<pair<int, int>> openList = { {0,0} };
-vector<pair<int, int>> rejectionList = { {0,0} };
+    vector<pair<int, int>> rejectionList = { {0,0} };
     vector<int> cellCost = {0};
-    vector<vector<int>> expansionVector (map.mapHeight, std::vector<int>(map.mapWidth, -1));
-
+    //cout << "Expansion #: " << currExp << endl;
+    //currExp++;
+    //cout << "Open List: ";
+    //cout << "[" << cellCost[currO] << " " << openList[currO].first << " " << openList[currO].second << "]" << ", ";
+    //cout << endl;
+    //cout << "Cell Picked: [" << cellCost[currO] << " " << openList[currO].first << " " << openList[currO].second << "]" << endl;
     while (!openList.empty())
     {
+        //cout << "Expansion #: " << currExp << endl;
+        currExp++;
         auto currOpenCell = openList[currO];
         int currCost = cellCost[currO];
-        expansionVector[currOpenCell.first][currOpenCell.second] = currExp;
-        currExp++;
         bool isNewItemAdded = false;
 
         for (int i = currOpenCell.first - 1; (i <= currOpenCell.first + 1); i++)
@@ -85,19 +89,18 @@ vector<pair<int, int>> rejectionList = { {0,0} };
             cellCost.erase(cellCost.begin() + index);
             rejectionList.push_back(currOpenCell);
         }
-        expansionVector[openList[currO].first][openList[currO].second] = currExp;
+        //cout << "Open List: ";
+        for (int ind = openList.size()-1; ind >= 0; ind--)
+        {
+            auto x = openList[ind];
+            currCost = cellCost[ind];
+           // cout << "[" << currCost << " " << x.first << " " << x.second << "]" << ", ";
+        }
+        //cout << endl;
+        //cout << "Cell Picked: [" << cellCost[currO] << " " << openList[currO].first << " " << openList[currO].second << "]" << endl;
         if ((openList[currO].first == planner.goal[0]) && (openList[currO].second == planner.goal[1]))
         {
             cout << "[" << cellCost[currO] << ", " << openList[currO].first << ", " << openList[currO].second << "]" << endl;
-            for (int i = 0; i < expansionVector.size(); i++)
-            {
-                auto z = expansionVector[i];
-                for (int j = 0; j < z.size(); j++)
-                {
-                    cout << z[j] << " ";
-                }
-                cout << endl;
-            }
             break;
         }
     }
