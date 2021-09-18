@@ -1,3 +1,0 @@
-C:/Users/fady_/CLionProjects/BFS_ExpansionList/cmake-build-debug/CMakeFiles/BFS_ExpansionList.dir
-C:/Users/fady_/CLionProjects/BFS_ExpansionList/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/fady_/CLionProjects/BFS_ExpansionList/cmake-build-debug/CMakeFiles/rebuild_cache.dir
