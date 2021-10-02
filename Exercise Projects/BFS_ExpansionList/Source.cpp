@@ -48,9 +48,10 @@ void search(Map map, Planner planner)
     int currExp = 0;
     int currO = 0;
     vector<pair<int, int>> openList = { {0,0} };
-vector<pair<int, int>> rejectionList = { {0,0} };
+    vector<pair<int, int>> rejectionList = { {0,0} };
     vector<int> cellCost = {0};
-    vector<vector<int>> expansionVector (map.mapHeight, std::vector<int>(map.mapWidth, -1));
+    vector<vector<int>> expansionVector (map.mapHeight, vector<int>(map.mapWidth, -1));
+    vector<vector<string>> policyVector (map.mapHeight, vector<string>(map.mapWidth, "-"));
 
     while (!openList.empty())
     {
@@ -73,6 +74,7 @@ vector<pair<int, int>> rejectionList = { {0,0} };
                         openList.push_back(curr);
                         cellCost.push_back(currCost + 1);
                         isNewItemAdded = true;
+
                     }
                 }
             }
@@ -86,6 +88,22 @@ vector<pair<int, int>> rejectionList = { {0,0} };
             rejectionList.push_back(currOpenCell);
         }
         expansionVector[openList[currO].first][openList[currO].second] = currExp;
+        if (openList[currO].first - currOpenCell.first == 1)
+        {
+            policyVector[currOpenCell.first][currOpenCell.second] = "v";
+        }
+        else if (currOpenCell.first - openList[currO].first == 1)
+        {
+            policyVector[currOpenCell.first][currOpenCell.second] = "^";
+        }
+        else if (openList[currO].second - currOpenCell.second == 1)
+        {
+            policyVector[currOpenCell.first][currOpenCell.second] = ">";
+        }
+        else if (currOpenCell.second - openList[currO].second == 1)
+        {
+            policyVector[currOpenCell.first][currOpenCell.second] = "<";
+        }
         if ((openList[currO].first == planner.goal[0]) && (openList[currO].second == planner.goal[1]))
         {
             cout << "[" << cellCost[currO] << ", " << openList[currO].first << ", " << openList[currO].second << "]" << endl;
@@ -98,6 +116,18 @@ vector<pair<int, int>> rejectionList = { {0,0} };
                 }
                 cout << endl;
             }
+            for (int i = 0; i < policyVector.size(); i++)
+            {
+                auto z = policyVector[i];
+                for (int j = 0; j < z.size(); j++)
+                {
+                    cout << z[j] << " ";
+                }
+                cout << endl;
+            }
+
+
+
             break;
         }
     }
