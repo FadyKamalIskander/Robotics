@@ -1,0 +1,7 @@
+Packages used in the "Home Service Robot" Project:
+1) Turtlebot_gazebo: contains the turtletop robot simulation and can deploy it in a gazebo environment using a previously created world.
+2) Gmapping: Performs SLAM and builds a map of the environment using laser range sensors or cameras equipped on a robot.
+2) Amcl: Contains the Amcl algorithm responsible for performing the robot localization using a known map.
+3) turtlebot_rviz_launchers: Runs the Rviz tool with the required configuration to display the robot, map, markers, etc..
+4) Pick_objects: Used to execute the Robot function of moving to the pickup site and then towards the dropoff site.
+5) add_markers: Used to execute the function of adding and removing the markers at the pickup and dropoff locations.
