@@ -1,7 +1,31 @@
 Packages used in the "Home Service Robot" Project:
-1) Turtlebot_gazebo: contains the turtletop robot simulation and can deploy it in a gazebo environment using a previously created world.
-2) Gmapping: Performs SLAM and builds a map of the environment using laser range sensors or cameras equipped on a robot.
-2) Amcl: Contains the Amcl algorithm responsible for performing the robot localization using a known map.
-3) turtlebot_rviz_launchers: Runs the Rviz tool with the required configuration to display the robot, map, markers, etc..
-4) Pick_objects: Used to execute the Robot function of moving to the pickup site and then towards the dropoff site.
-5) add_markers: Used to execute the function of adding and removing the markers at the pickup and dropoff locations.
+* Turtlebot_simulator:
+   * This package contains the launchers required for using the turtlebot simulator. It is used by invoking the following launchers from it:
+      * Gmapping_demo.launch:
+         * Used to initialize and use the “Gmapping” module. Gmapping is a SLAM (Simultaneous Localization and Mapping) package which we use to create a 2-D occupancy grid map from the sensor and odometry data gathered by the turtlebot while it's moving throughout the area. 
+
+
+      * Turtlebot_world.launch:
+         * Used to launch the Turtlebot robot simulator in a Gazebo simulation world. A custom world file could be used, which we use to input our previously created world file to it.
+
+
+      * Amcl_demo.launch:
+         * Used to initialize and use the “Amcl” module. Amcl is a probabilistic localization algorithm for the robot that uses the map that was readily generated as an input, and a particle filter to track the robot’s pose on the map. A custom map file could be provided, which we use to input our generated map to it.
+
+
+* Turtlebot_interactions:
+   * This package contains the launchers required for the user’s interactions with the turtlebot_simulator including customized configurations for the Rviz tool. It is used by invoking the following launcher from it:
+      * View_navigation.launch:
+         * Used to call the Rviz tool to initialize it and provide it with a configuration that can be used to visualize the operations happening during the simulation. It is configured to display the Robot, the map, information generated from the navigation process such as the costmap, Localization arrows for the robot, and various other functionalities.
+
+
+* Turtlebot_teleop:
+   * This package contains the launchers required for moving and teleporting the turtlebot robot using the keyboard. It is used by invoking the “Keyboard_teleop.launch” launcher from it.
+
+
+* Pick_objects: 
+   * This package contains the launcher to execute the Robot function of moving to the pickup site and then towards the dropoff site. It is used by invoking the “pick_objects.launch” launcher from it.
+
+
+* Add_markers:
+   * This package contains the 2 nodes required to perform the function of adding and removing the markers from the pickup and drop off sites. The “add_markers” node is time-based while the “add_markers_amcl” node uses information from the Robot’s odometry to determine when to add and remove the markers at both locations.
